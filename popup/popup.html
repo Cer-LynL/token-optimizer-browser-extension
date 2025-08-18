@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Optimizer</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <header class="popup-header">
+            <div class="logo">
+                <span class="logo-icon">🚀</span>
+                <h1>Token Optimizer</h1>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">Free</span>
+            </div>
+        </header>
+
+        <main class="popup-main">
+            <!-- Quick Stats -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Tokens Saved</div>
+                        <div class="stat-value" id="tokensSaved">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Optimizations</div>
+                        <div class="stat-value" id="optimizationsCount">0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Token Budget (Pro) -->
+            <section class="budget-section" id="budgetSection" style="display: none;">
+                <h3>Monthly Token Budget</h3>
+                <div class="budget-bar">
+                    <div class="budget-progress" id="budgetProgress"></div>
+                </div>
+                <div class="budget-stats">
+                    <span id="budgetUsed">0</span> / <span id="budgetTotal">0</span> tokens
+                    <span class="budget-percentage" id="budgetPercentage">0%</span>
+                </div>
+            </section>
+
+            <!-- Quick Settings -->
+            <section class="settings-section">
+                <h3>Quick Settings</h3>
+                
+                <label class="setting-item">
+                    <input type="checkbox" id="autoOptimizeToggle">
+                    <span class="setting-label">Auto-optimize prompts</span>
+                    <span class="setting-description">Automatically optimize all prompts without showing the overlay</span>
+                </label>
+
+                <div class="setting-item" id="proSettingsContainer" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="sensitiveDataToggle">
+                        <span class="setting-label">Sensitive data detection</span>
+                        <span class="setting-description">Warn when prompts contain personal information</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Current Site Info -->
+            <section class="site-section" id="siteSection">
+                <h3>Current Site</h3>
+                <div class="site-info" id="siteInfo">
+                    <div class="site-status">Not on supported LLM site</div>
+                </div>
+            </section>
+
+            <!-- License Section -->
+            <section class="license-section" id="licenseSection">
+                <div class="license-free" id="licenseFree">
+                    <h3>Upgrade to Pro</h3>
+                    <ul class="feature-list">
+                        <li>✨ Advanced paraphrasing & tone control</li>
+                        <li>📝 Prompt templates & suggestions</li>
+                        <li>🛡️ Sensitive data detection</li>
+                        <li>📈 Advanced analytics & insights</li>
+                        <li>💰 Token budgeting & alerts</li>
+                    </ul>
+                    <button class="to-btn to-btn-primary" id="upgradeBtn">Upgrade to Pro</button>
+                </div>
+
+                <div class="license-pro" id="licensePro" style="display: none;">
+                    <div class="pro-status">
+                        <span class="pro-badge">✨ PRO</span>
+                        <span>All features unlocked!</span>
+                    </div>
+                    <div class="license-info">
+                        <div class="license-key" id="licenseKeyDisplay">License: ••••••••</div>
+                        <div class="license-expiry" id="licenseExpiry"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="popup-footer">
+            <button class="to-btn to-btn-secondary" id="settingsBtn">Settings</button>
+            <button class="to-btn to-btn-secondary" id="helpBtn">Help</button>
+        </footer>
+    </div>
+
+    <script src="../utils/storage.js"></script>
+    <script src="../utils/model-detection.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Optimizer Settings</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="settings-container">
+        <header class="settings-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <span class="logo-icon">🚀</span>
+                    <h1>Token Optimizer Settings</h1>
+                </div>
+                <div class="status-section">
+                    <div class="license-status" id="licenseStatus">
+                        <span class="status-badge free" id="statusBadge">Free</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="settings-content">
+            <nav class="settings-nav">
+                <button class="nav-item active" data-section="general">
+                    <span class="nav-icon">⚙️</span>
+                    General
+                </button>
+                <button class="nav-item" data-section="license">
+                    <span class="nav-icon">🔑</span>
+                    License
+                </button>
+                <button class="nav-item" data-section="optimization">
+                    <span class="nav-icon">⚡</span>
+                    Optimization
+                </button>
+                <button class="nav-item" data-section="privacy" id="navPrivacy">
+                    <span class="nav-icon">🛡️</span>
+                    Privacy & Security
+                    <span class="pro-indicator">PRO</span>
+                </button>
+                <button class="nav-item" data-section="analytics" id="navAnalytics">
+                    <span class="nav-icon">📊</span>
+                    Analytics
+                    <span class="pro-indicator">PRO</span>
+                </button>
+                <button class="nav-item" data-section="advanced">
+                    <span class="nav-icon">🔧</span>
+                    Advanced
+                </button>
+            </nav>
+
+            <main class="settings-main">
+                <!-- General Settings -->
+                <section class="settings-section active" data-section="general">
+                    <h2>General Settings</h2>
+                    
+                    <div class="setting-group">
+                        <h3>Behavior</h3>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="autoOptimize">
+                            <div class="setting-content">
+                                <div class="setting-title">Auto-optimize prompts</div>
+                                <div class="setting-description">Automatically optimize and send prompts without showing the overlay</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="showCosts">
+                            <div class="setting-content">
+                                <div class="setting-title">Show cost estimates</div>
+                                <div class="setting-description">Display estimated token costs for different models</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="showNotifications">
+                            <div class="setting-content">
+                                <div class="setting-title">Show notifications</div>
+                                <div class="setting-description">Display browser notifications for important events</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Model Preferences</h3>
+                        
+                        <div class="setting-item">
+                            <div class="setting-content">
+                                <div class="setting-title">Default Provider</div>
+                                <div class="setting-description">Choose your preferred LLM provider for cost calculations</div>
+                                <select class="to-select" id="defaultProvider">
+                                    <option value="">Auto-detect</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-content">
+                                <div class="setting-title">Default Model</div>
+                                <div class="setting-description">Choose your preferred model for token cost estimates</div>
+                                <select class="to-select" id="defaultModel">
+                                    <option value="">Auto-detect</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- License Settings -->
+                <section class="settings-section" data-section="license">
+                    <h2>License Management</h2>
+                    
+                    <div id="licenseFreeSection">
+                        <div class="upgrade-card">
+                            <div class="upgrade-content">
+                                <h3>Upgrade to Pro</h3>
+                                <p>Unlock advanced features and get the most out of Token Optimizer</p>
+                                
+                                <div class="features-grid">
+                                    <div class="feature-item">
+                                        <span class="feature-icon">✨</span>
+                                        <span>Advanced paraphrasing & tone control</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">📝</span>
+                                        <span>Prompt templates & suggestions</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">📊</span>
+                                        <span>Conversation summarization</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">🛡️</span>
+                                        <span>Sensitive data detection</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">📈</span>
+                                        <span>Advanced analytics & insights</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">💰</span>
+                                        <span>Token budgeting & alerts</span>
+                                    </div>
+                                </div>
+                                
+                                <button class="to-btn to-btn-primary" id="upgradeToProBtn">
+                                    Get Pro License
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="licenseProSection" style="display: none;">
+                        <div class="license-info-card">
+                            <div class="license-status-header">
+                                <span class="pro-badge">✨ PRO</span>
+                                <span class="license-status-text">Active</span>
+                            </div>
+                            
+                            <div class="license-details">
+                                <div class="license-detail">
+                                    <label>License Key:</label>
+                                    <span class="license-key" id="licenseKeyDisplay">••••••••••••</span>
+                                    <button class="to-btn to-btn-sm" id="showLicenseKey">Show</button>
+                                </div>
+                                
+                                <div class="license-detail">
+                                    <label>Status:</label>
+                                    <span class="license-value" id="licenseStatusText">Active</span>
+                                </div>
+                                
+                                <div class="license-detail">
+                                    <label>Expires:</label>
+                                    <span class="license-value" id="licenseExpiry">Never</span>
+                                </div>
+                            </div>
+                            
+                            <div class="license-actions">
+                                <button class="to-btn to-btn-secondary" id="refreshLicense">Refresh Status</button>
+                                <button class="to-btn to-btn-danger" id="removeLicense">Remove License</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Enter License Key</h3>
+                        
+                        <div class="license-input-section">
+                            <div class="license-input-group">
+                                <input type="text" class="to-input" id="licenseKeyInput" placeholder="Enter your license key">
+                                <button class="to-btn to-btn-primary" id="validateLicenseBtn">Validate</button>
+                            </div>
+                            
+                            <div class="license-help">
+                                <p>Get your license key from your <a href="#" id="customerPortalLink">customer portal</a> after purchasing a Pro subscription.</p>
+                            </div>
+                            
+                            <div class="license-validation-result" id="licenseValidationResult"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Optimization Settings -->
+                <section class="settings-section" data-section="optimization">
+                    <h2>Optimization Settings</h2>
+                    
+                    <div class="setting-group">
+                        <h3>Optimization Rules</h3>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="removeFiller">
+                            <div class="setting-content">
+                                <div class="setting-title">Remove filler words</div>
+                                <div class="setting-description">Remove words like "please", "kindly", "just", etc.</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="useAbbreviations">
+                            <div class="setting-content">
+                                <div class="setting-title">Use abbreviations</div>
+                                <div class="setting-description">Replace long terms with common abbreviations (AI, ML, API, etc.)</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="trimContext">
+                            <div class="setting-content">
+                                <div class="setting-title">Trim context</div>
+                                <div class="setting-description">Remove redundant background information</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="semanticChunking">
+                            <div class="setting-content">
+                                <div class="setting-title">Semantic chunking</div>
+                                <div class="setting-description">Split multi-task prompts into organized lists</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Token Budget <span class="pro-indicator">PRO</span></h3>
+                        
+                        <div class="setting-item">
+                            <div class="setting-content">
+                                <div class="setting-title">Monthly Token Limit</div>
+                                <div class="setting-description">Set a monthly token processing limit to track usage</div>
+                                <div class="input-group">
+                                    <input type="number" class="to-input" id="tokenBudget" placeholder="0" min="0" step="1000">
+                                    <span class="input-suffix">tokens</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="budget-display" id="budgetDisplay" style="display: none;">
+                            <div class="budget-progress-bar">
+                                <div class="budget-progress-fill" id="budgetProgressFill"></div>
+                            </div>
+                            <div class="budget-stats">
+                                <span id="budgetUsed">0</span> / <span id="budgetTotal">0</span> tokens
+                                (<span id="budgetPercent">0%</span> used)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Privacy & Security Settings -->
+                <section class="settings-section" data-section="privacy">
+                    <h2>Privacy & Security <span class="pro-indicator">PRO</span></h2>
+                    
+                    <div class="setting-group">
+                        <h3>Sensitive Data Detection</h3>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="enableSensitiveDetection">
+                            <div class="setting-content">
+                                <div class="setting-title">Enable sensitive data detection</div>
+                                <div class="setting-description">Scan prompts for personal information, API keys, and other sensitive data</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="blockSensitiveSubmission">
+                            <div class="setting-content">
+                                <div class="setting-title">Block submission with sensitive data</div>
+                                <div class="setting-description">Prevent submitting prompts that contain critical sensitive information</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Custom Keywords</h3>
+                        
+                        <div class="custom-keywords-section">
+                            <div class="keywords-input-group">
+                                <input type="text" class="to-input" id="customKeywordInput" placeholder="Add custom sensitive keyword">
+                                <button class="to-btn to-btn-primary" id="addKeywordBtn">Add</button>
+                            </div>
+                            
+                            <div class="keywords-list" id="customKeywordsList">
+                                <!-- Custom keywords will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Data Privacy</h3>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="localProcessingOnly">
+                            <div class="setting-content">
+                                <div class="setting-title">Local processing only</div>
+                                <div class="setting-description">Process all data locally without sending to external services</div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Analytics Settings -->
+                <section class="settings-section" data-section="analytics">
+                    <h2>Analytics & Insights <span class="pro-indicator">PRO</span></h2>
+                    
+                    <div class="analytics-overview" id="analyticsOverview">
+                        <!-- Analytics data will be populated here -->
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Analytics Preferences</h3>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="enableAnalytics">
+                            <div class="setting-content">
+                                <div class="setting-title">Enable analytics tracking</div>
+                                <div class="setting-description">Track optimization statistics and usage patterns</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="showOptimizationTips">
+                            <div class="setting-content">
+                                <div class="setting-title">Show optimization tips</div>
+                                <div class="setting-description">Display personalized tips based on your usage patterns</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Data Export</h3>
+                        
+                        <div class="export-section">
+                            <button class="to-btn to-btn-secondary" id="exportAnalyticsBtn">Export Analytics Data</button>
+                            <button class="to-btn to-btn-danger" id="resetAnalyticsBtn">Reset All Analytics</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Advanced Settings -->
+                <section class="settings-section" data-section="advanced">
+                    <h2>Advanced Settings</h2>
+                    
+                    <div class="setting-group">
+                        <h3>Debug & Development</h3>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="enableDebugMode">
+                            <div class="setting-content">
+                                <div class="setting-title">Debug mode</div>
+                                <div class="setting-description">Enable detailed logging for troubleshooting</div>
+                            </div>
+                        </label>
+                        
+                        <label class="setting-item">
+                            <input type="checkbox" id="betaFeatures">
+                            <div class="setting-content">
+                                <div class="setting-title">Beta features</div>
+                                <div class="setting-description">Enable experimental features (may be unstable)</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Data Management</h3>
+                        
+                        <div class="data-management-section">
+                            <button class="to-btn to-btn-secondary" id="exportSettingsBtn">Export Settings</button>
+                            <button class="to-btn to-btn-secondary" id="importSettingsBtn">Import Settings</button>
+                            <button class="to-btn to-btn-danger" id="resetAllSettingsBtn">Reset All Settings</button>
+                            <input type="file" id="importSettingsFile" accept=".json" style="display: none;">
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>About</h3>
+                        
+                        <div class="about-section">
+                            <div class="version-info">
+                                <div>Version: <span id="extensionVersion">1.0.0</span></div>
+                                <div>License: <span id="licenseType">MIT</span></div>
+                            </div>
+                            
+                            <div class="links-section">
+                                <a href="https://tokenoptimizer.com/help" target="_blank" class="to-btn to-btn-secondary">Help & Documentation</a>
+                                <a href="https://tokenoptimizer.com/privacy" target="_blank" class="to-btn to-btn-secondary">Privacy Policy</a>
+                                <a href="https://github.com/tokenoptimizer/extension" target="_blank" class="to-btn to-btn-secondary">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../utils/storage.js"></script>
+    <script src="../utils/model-detection.js"></script>
+    <script src="../utils/analytics.js"></script>
+    <script src="../utils/sensitive-data-detector.js"></script>
+    <script src="../background/license-validator.js"></script>
+    <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Token Optimizer v3 Test Suite</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .test-case {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .test-case h3 {
+            margin: 0 0 15px 0;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .difficulty {
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .difficulty.medium { background: #f59e0b; }
+        .difficulty.hard { background: #dc2626; }
+        .difficulty.extreme { background: #7c2d12; }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            resize: vertical;
+            font-family: ui-monospace, SFMono-Regular, monospace;
+        }
+        .expected {
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .challenge {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .instructions {
+            background: #eff6ff;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .category {
+            background: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin: 25px 0 15px 0;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .stat-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+        }
+        .stat-box strong {
+            display: block;
+            font-size: 16px;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔥 Advanced Token Optimizer v3 Test Suite</h1>
+    
+    <div class="instructions">
+        <h3>🎯 Advanced Testing Protocol</h3>
+        <p>These tests push the optimization algorithms to their limits. Each test targets specific edge cases and complex scenarios.</p>
+        <div class="stats">
+            <div class="stat-box">
+                <strong>15</strong>
+                Test Cases
+            </div>
+            <div class="stat-box">
+                <strong>4</strong>
+                Difficulty Levels
+            </div>
+            <div class="stat-box">
+                <strong>100%</strong>
+                Coverage Goal
+            </div>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🔬 Research Algorithm Stress Tests</h2>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Chain Reaction Optimization <span class="difficulty hard">Hard</span></h3>
+        <textarea>I would really like you to please help me to understand due to the fact that at this point in time I basically need assistance with regard to this very complex problem that I obviously can't solve and could you please also help me with the next step</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Multiple overlapping verbose patterns that should trigger cascading optimizations across all 5 research techniques
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> ITPC removes greetings + fillers, CoS removes request patterns, LPO optimizes phrases, MOO handles dual requests, DCA removes meta-commentary
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Nested Politeness Removal <span class="difficulty medium">Medium</span></h3>
+        <textarea>Could you please kindly help me to understand if you would be so kind as to assist me in figuring out this issue</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Multiple layers of politeness that need ordered processing to avoid grammatical issues
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Remove all politeness layers while preserving core request meaning
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Complex Task Decomposition <span class="difficulty hard">Hard</span></h3>
+        <textarea>I need you to first analyze this data set and then create a summary report and after that generate visualizations and also build a dashboard and finally present the findings</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> 5-step sequential task requiring proper MOO semantic chunking
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Clean numbered list (1-5) with proper line breaks, not inline format
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>⚡ Edge Case & Grammar Tests</h2>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Punctuation Chaos <span class="difficulty extreme">Extreme</span></h3>
+        <textarea>Hello, could you please, really, help me understand,, this problem??? And also,, could you please help me with this other issue!!!</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Multiple punctuation errors, duplicate commas, excessive question/exclamation marks
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Clean punctuation, remove greetings, fix duplicate markers, preserve sentence structure
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Word Duplication Matrix <span class="difficulty hard">Hard</span></h3>
+        <textarea>I really really need you to to help me me understand this this very very complex complex problem that that needs needs attention attention</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Multiple word duplications throughout text requiring careful deduplication
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Remove ALL duplicate words while preserving meaning and grammar
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Case Sensitivity Test <span class="difficulty medium">Medium</span></h3>
+        <textarea>could you PLEASE help me understand this And Also help me with THAT and THEN show me HOW to do THIS</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Mixed case patterns that should be handled consistently
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Proper capitalization, handle mixed case connectors, maintain professional tone
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🎭 Real-World Scenario Tests</h2>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Business Email Optimization <span class="difficulty medium">Medium</span></h3>
+        <textarea>I hope this message finds you well. I would like to reach out to you with regard to the project proposal that we discussed. Could you please provide me with your thoughts on this matter and also let me know if there are any additional requirements that need to be addressed at this point in time?</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Formal business language with multiple verbose corporate phrases
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Professional but concise, remove corporate fluff, maintain respectful tone
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Academic Paper Request <span class="difficulty hard">Hard</span></h3>
+        <textarea>It should be noted that for the purpose of this research, I would like you to help me understand the methodology that was used in this study, and also I need assistance with analyzing the statistical significance of the results, and furthermore, could you please explain the implications of these findings?</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Academic language with formal structures and multiple research requests
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Remove academic fluff, preserve technical accuracy, organize multiple requests
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Customer Support Query <span class="difficulty medium">Medium</span></h3>
+        <textarea>Hello, I'm reaching out because I'm having some issues with your product and I was wondering if you could please help me troubleshoot this problem and also if you could provide some guidance on how to prevent this from happening again</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Customer service tone with multiple support requests
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Clear problem statement, organized support requests, maintain helpfulness
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>🚀 Performance & Limit Tests</h2>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Minimal Text Challenge <span class="difficulty medium">Medium</span></h3>
+        <textarea>Please help</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Very short text that should trigger minimal or no optimization
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Minimal processing, avoid over-optimization of already concise text
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Long Form Content <span class="difficulty hard">Hard</span></h3>
+        <textarea>I would really like you to please help me understand this very complex topic due to the fact that at this point in time I'm struggling with multiple concepts and I need assistance with breaking down the information and also I would appreciate it if you could provide examples and furthermore I think it would be helpful if you could create a step-by-step guide and additionally I would like you to explain the underlying principles and finally could you please recommend some additional resources for further learning</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Long text with multiple optimization opportunities across all categories
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Significant token reduction while maintaining all core requests, proper chunking
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Special Characters & Formatting <span class="difficulty hard">Hard</span></h3>
+        <textarea>Could you please help me understand this: "complex problem" (that I can't solve) - and also help me with @mentions, #hashtags, and https://example.com links?</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Mixed content with URLs, mentions, hashtags, quotes, and parentheses
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Preserve special formatting, handle mixed content types, optimize surrounding text
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Code Context Optimization <span class="difficulty extreme">Extreme</span></h3>
+        <textarea>I would like you to help me debug this JavaScript function: `function test() { return "hello"; }` and also could you please explain how it works and then show me how to improve it</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Code mixed with natural language requiring careful preservation of technical content
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Preserve code exactly, optimize surrounding language, handle technical context
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Emotional Context Preservation <span class="difficulty hard">Hard</span></h3>
+        <textarea>I'm really struggling with this problem and I would really appreciate it if you could please help me understand why this is happening and also provide some emotional support during this difficult time</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Emotional language that needs optimization while preserving sentiment and empathy
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Maintain emotional context, remove redundancy, preserve human elements
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h3>🧪 Multiple Language Elements <span class="difficulty extreme">Extreme</span></h3>
+        <textarea>Could you please help me translate "bonjour" from French and also explain the Spanish phrase "hola mundo" and then show me how to say "hello" in different languages</textarea>
+        <div class="challenge">
+            <strong>Challenge:</strong> Multiple languages, translation requests, and cultural context
+        </div>
+        <div class="expected">
+            <strong>Expected:</strong> Preserve foreign language phrases exactly, organize translation requests efficiently
+        </div>
+    </div>
+
+    <script src="debug-content-v3.js"></script>
+    
+    <script>
+        console.log('🔥 Advanced Token Optimizer v3 Test Suite Loaded');
+        console.log('📊 15 test cases across 4 difficulty levels');
+        console.log('🎯 Testing edge cases, real-world scenarios, and algorithm limits');
+        
+        // Performance tracking
+        let testCount = 0;
+        let totalSavings = 0;
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName === 'TEXTAREA') {
+                testCount++;
+                console.log(`🧪 Test ${testCount} initiated`);
+            }
+        });
+    </script>
+</body>
+</html>

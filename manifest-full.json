@@ -1,0 +1,85 @@
+{
+  "manifest_version": 3,
+  "name": "Token Optimizer",
+  "version": "1.0.0",
+  "description": "Optimize and enhance your prompts for major LLM chat services with token counting and cost estimation.",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://lovable.io/*",
+    "https://gemini.google.com/*",
+    "https://llama.meta.ai/*",
+    "https://deepseek.com/*",
+    "https://grok.x.ai/*",
+    "https://mistral.ai/*"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://lovable.io/*",
+        "https://gemini.google.com/*",
+        "https://llama.meta.ai/*",
+        "https://deepseek.com/*",
+        "https://grok.x.ai/*",
+        "https://mistral.ai/*"
+      ],
+      "js": [
+        "utils/storage.js",
+        "utils/model-detection.js",
+        "content/tokenizer.js",
+        "content/optimizer.js",
+        "content/overlay.js",
+        "content/content-script.js"
+      ],
+      "css": [
+        "styles/common.css",
+        "styles/overlay.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Token Optimizer",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "32": "assets/icons/icon32.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    }
+  },
+  
+  "options_page": "options/options.html",
+  
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "styles/*.css",
+        "assets/templates/*.json"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Token Optimizer v5 Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-case {
+            background: white;
+            border: 2px solid #059669;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .expected {
+            background: #f0f9ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .result {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background: #059669;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 5px 0 0;
+        }
+        .log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            height: 150px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Direct Token Optimizer v5 Test</h1>
+    
+    <p><strong>Instructions:</strong> This directly tests the v5 optimization engine without the overlay. Click "Test Optimization" to see the actual optimized results vs expected.</p>
+    
+    <div class="log" id="test-log"></div>
+
+    <div class="test-case">
+        <h4>🧪 Test 1: Basic Verbose Phrases</h4>
+        <textarea id="test1">I would like you to please help me understand due to the fact that at this point in time I need assistance with this problem</textarea>
+        <div class="expected">
+            <strong>Expected:</strong> "Help me understand because now I need assistance with this problem"
+        </div>
+        <div class="result" id="result1"></div>
+        <button onclick="testOptimization(1)">Test Optimization</button>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 Test 2: Word Duplication Matrix</h4>
+        <textarea id="test2">I really really need you to to help me me understand this this very very complex complex problem that that needs needs attention attention</textarea>
+        <div class="expected">
+            <strong>Expected:</strong> "I need you to help me understand this complex problem that needs attention"
+        </div>
+        <div class="result" id="result2"></div>
+        <button onclick="testOptimization(2)">Test Optimization</button>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 Test 3: Grammar Preservation</h4>
+        <textarea id="test3">could you to to help me understand this and please please make sure it's clear</textarea>
+        <div class="expected">
+            <strong>Expected:</strong> "Help me understand this and make sure it's clear"
+        </div>
+        <div class="result" id="result3"></div>
+        <button onclick="testOptimization(3)">Test Optimization</button>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 Test 4: Multi-Task Decomposition</h4>
+        <textarea id="test4">I need you to help me write a business plan and also create a marketing strategy and then develop a budget forecast for my startup</textarea>
+        <div class="expected">
+            <strong>Expected:</strong> "1. Help me write a business plan\n2. Create a marketing strategy\n3. Develop a budget forecast for my startup"
+        </div>
+        <div class="result" id="result4"></div>
+        <button onclick="testOptimization(4)">Test Optimization</button>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 Test 5: Chain Reaction Optimization</h4>
+        <textarea id="test5">I would really like you to please help me to understand due to the fact that at this point in time I basically need assistance with regard to this very complex problem</textarea>
+        <div class="expected">
+            <strong>Expected:</strong> "Help me understand because now I need assistance regarding this complex problem"
+        </div>
+        <div class="result" id="result5"></div>
+        <button onclick="testOptimization(5)">Test Optimization</button>
+    </div>
+
+    <button onclick="testAllOptimizations()" style="background: #dc2626; font-size: 16px; padding: 15px 30px;">🚀 Test All Optimizations</button>
+
+    <script src="debug-content-v5.js"></script>
+    
+    <script>
+        function log(message) {
+            const logElement = document.getElementById('test-log');
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.innerHTML += `[${timestamp}] ${message}\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+            console.log(`[DIRECT TEST] ${message}`);
+        }
+
+        function testOptimization(testNum) {
+            const input = document.getElementById(`test${testNum}`).value;
+            const resultDiv = document.getElementById(`result${testNum}`);
+            
+            log(`🧪 Testing optimization ${testNum}...`);
+            log(`📝 Input: "${input}"`);
+            
+            try {
+                // Call the optimization function directly
+                const result = fixedOptimizationV5(input);
+                const optimizedText = result.text;
+                
+                log(`🔄 Output: "${optimizedText}"`);
+                log(`🔬 Techniques: ${Array.from(result.appliedTechniques).join(', ')}`);
+                
+                const originalTokens = estimateTokensAdvanced(input);
+                const optimizedTokens = estimateTokensAdvanced(optimizedText);
+                const tokensSaved = originalTokens - optimizedTokens;
+                const reductionPercent = Math.round((tokensSaved / originalTokens) * 100);
+                
+                resultDiv.innerHTML = `
+                    <strong>Actual Result:</strong><br>
+                    <code style="background: #f0fdf4; padding: 4px 6px; border-radius: 3px; display: block; white-space: pre-wrap; margin-top: 5px;">${optimizedText}</code>
+                    <br>
+                    <strong>Stats:</strong> ${originalTokens} → ${optimizedTokens} tokens (${reductionPercent}% reduction)<br>
+                    <strong>Techniques:</strong> ${Array.from(result.appliedTechniques).join(', ')}
+                `;
+                
+                log(`📊 Tokens: ${originalTokens} → ${optimizedTokens} (${reductionPercent}% reduction)`);
+                log(`✅ Test ${testNum} completed\n`);
+                
+            } catch (error) {
+                log(`❌ Test ${testNum} failed: ${error.message}`);
+                resultDiv.innerHTML = `<strong style="color: red;">Error:</strong> ${error.message}`;
+            }
+        }
+
+        function testAllOptimizations() {
+            log('🚀 Running all optimization tests...\n');
+            for (let i = 1; i <= 5; i++) {
+                testOptimization(i);
+            }
+            log('🎉 All tests completed!');
+        }
+
+        // Initialize
+        log('💡 Direct v5 optimization test ready!');
+        log('🔧 Testing optimization functions directly (bypassing overlay)');
+        log('📋 Click individual test buttons or "Test All Optimizations"');
+        
+        // Test if functions are available
+        setTimeout(() => {
+            if (typeof fixedOptimizationV5 === 'function') {
+                log('✅ v5 optimization function detected');
+            } else {
+                log('❌ v5 optimization function not found - extension may not be loaded');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "token-optimizer-extension",
+  "version": "1.0.0",
+  "description": "Cross-browser extension that optimizes LLM prompts with token counting and cost estimation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "build": "echo 'Extension built - ready to load unpacked'",
+    "test": "echo 'Tests not implemented yet'"
+  },
+  "keywords": [
+    "browser-extension",
+    "llm",
+    "chatgpt",
+    "claude",
+    "prompt-optimization",
+    "token-counting"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "stripe": "^14.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

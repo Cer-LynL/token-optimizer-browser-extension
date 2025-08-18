@@ -1,0 +1,41 @@
+{
+  "code-review": {
+    "name": "Code Review Request",
+    "category": "development",
+    "description": "Request a comprehensive code review",
+    "template": "Please review the following {language} code for:\n\n🔍 **Review Focus Areas:**\n- Code quality and best practices\n- Security vulnerabilities\n- Performance optimizations\n- Documentation and readability\n- Test coverage\n{additional_focus_areas}\n\n📁 **Code Context:**\n- Project: {project_name}\n- Component/Module: {component_name}\n- Purpose: {code_purpose}\n- Dependencies: {key_dependencies}\n\n💻 **Code to Review:**\n```{language}\n{code_block}\n```\n\n📋 **Specific Questions:**\n{specific_questions}\n\n⚙️ **Environment Details:**\n- Framework: {framework}\n- Version: {version}\n- Target Environment: {environment}\n\nPlease provide feedback on improvements, potential issues, and suggested alternatives.",
+    "variables": ["language", "additional_focus_areas", "project_name", "component_name", "code_purpose", "key_dependencies", "code_block", "specific_questions", "framework", "version", "environment"]
+  },
+  
+  "bug-report": {
+    "name": "Bug Report Analysis",
+    "category": "development",
+    "description": "Analyze and help debug a code issue",
+    "template": "Help me debug this {language} issue:\n\n🐛 **Problem Description:**\n{problem_description}\n\n❌ **Expected Behavior:**\n{expected_behavior}\n\n⚠️ **Actual Behavior:**\n{actual_behavior}\n\n🔄 **Steps to Reproduce:**\n{reproduction_steps}\n\n💻 **Relevant Code:**\n```{language}\n{problematic_code}\n```\n\n📊 **Error Messages/Logs:**\n```\n{error_messages}\n```\n\n🛠️ **Environment:**\n- {language} version: {language_version}\n- Framework: {framework}\n- OS: {operating_system}\n- Additional tools: {additional_tools}\n\n🔍 **What I've Tried:**\n{attempted_solutions}\n\nPlease help identify the root cause and suggest solutions.",
+    "variables": ["language", "problem_description", "expected_behavior", "actual_behavior", "reproduction_steps", "problematic_code", "error_messages", "language_version", "framework", "operating_system", "additional_tools", "attempted_solutions"]
+  },
+  
+  "architecture-review": {
+    "name": "Architecture Design Review",
+    "category": "development",
+    "description": "Review system architecture and design decisions",
+    "template": "Please review this system architecture design:\n\n🏗️ **System Overview:**\n- Project: {project_name}\n- Scale: {expected_scale}\n- Domain: {business_domain}\n- Timeline: {project_timeline}\n\n📋 **Requirements:**\n{functional_requirements}\n\n📊 **Non-Functional Requirements:**\n- Performance: {performance_requirements}\n- Scalability: {scalability_requirements}\n- Security: {security_requirements}\n- Availability: {availability_requirements}\n\n🔧 **Proposed Architecture:**\n{architecture_description}\n\n💾 **Technology Stack:**\n- Backend: {backend_technologies}\n- Frontend: {frontend_technologies}\n- Database: {database_technologies}\n- Infrastructure: {infrastructure_technologies}\n- External Services: {external_services}\n\n🎯 **Key Design Decisions:**\n{design_decisions}\n\n❓ **Specific Concerns:**\n{specific_concerns}\n\nPlease evaluate the architecture for scalability, maintainability, security, and alignment with requirements.",
+    "variables": ["project_name", "expected_scale", "business_domain", "project_timeline", "functional_requirements", "performance_requirements", "scalability_requirements", "security_requirements", "availability_requirements", "architecture_description", "backend_technologies", "frontend_technologies", "database_technologies", "infrastructure_technologies", "external_services", "design_decisions", "specific_concerns"]
+  },
+  
+  "code-explanation": {
+    "name": "Code Explanation Request",
+    "category": "development",
+    "description": "Get detailed explanation of complex code",
+    "template": "Please explain this {language} code in detail:\n\n📖 **Context:**\n- Source: {code_source}\n- Purpose: {code_purpose}\n- Complexity Level: {complexity_level}\n\n💻 **Code to Explain:**\n```{language}\n{code_to_explain}\n```\n\n🎯 **What I Need to Understand:**\n{specific_questions}\n\n👥 **Audience Level:**\n{audience_level}\n\n📚 **Explanation Preferences:**\n- Include examples: {include_examples}\n- Show alternatives: {show_alternatives}\n- Explain patterns: {explain_patterns}\n- Performance implications: {discuss_performance}\n\nPlease provide a comprehensive explanation covering:\n1. Overall purpose and functionality\n2. Step-by-step breakdown\n3. Key concepts and patterns used\n4. Potential improvements or alternatives\n5. Common pitfalls or considerations",
+    "variables": ["language", "code_source", "code_purpose", "complexity_level", "code_to_explain", "specific_questions", "audience_level", "include_examples", "show_alternatives", "explain_patterns", "discuss_performance"]
+  },
+  
+  "optimization-request": {
+    "name": "Performance Optimization",
+    "category": "development",
+    "description": "Request code optimization suggestions",
+    "template": "Help optimize this {language} code for better performance:\n\n⚡ **Current Performance Issues:**\n{performance_issues}\n\n📊 **Performance Metrics:**\n- Current execution time: {current_execution_time}\n- Memory usage: {memory_usage}\n- Target improvement: {target_improvement}\n- Bottlenecks identified: {known_bottlenecks}\n\n💻 **Code to Optimize:**\n```{language}\n{code_to_optimize}\n```\n\n🎯 **Optimization Goals:**\n{optimization_goals}\n\n⚖️ **Constraints:**\n- Maintain functionality: {maintain_functionality}\n- Code readability: {readability_priority}\n- Memory vs. speed trade-offs: {tradeoff_preferences}\n- Compatibility requirements: {compatibility_requirements}\n\n🔍 **Context:**\n- Typical input size: {input_size}\n- Frequency of execution: {execution_frequency}\n- Hardware constraints: {hardware_constraints}\n\nPlease suggest optimizations with explanations of expected performance gains.",
+    "variables": ["language", "performance_issues", "current_execution_time", "memory_usage", "target_improvement", "known_bottlenecks", "code_to_optimize", "optimization_goals", "maintain_functionality", "readability_priority", "tradeoff_preferences", "compatibility_requirements", "input_size", "execution_frequency", "hardware_constraints"]
+  }
+}

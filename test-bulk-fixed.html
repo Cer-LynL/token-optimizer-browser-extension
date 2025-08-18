@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fixed Bulk Token Optimizer Test Runner</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .control-panel {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .test-result {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            display: none;
+        }
+        .test-result.running {
+            display: block;
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        .test-result.completed {
+            display: block;
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        .test-result.failed {
+            display: block;
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-box strong {
+            display: block;
+            font-size: 20px;
+            color: #1f2937;
+        }
+        .optimization-details {
+            background: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover { background: #2563eb; }
+        button:disabled { background: #9ca3af; cursor: not-allowed; }
+        .button-stop { background: #ef4444; }
+        .button-stop:hover { background: #dc2626; }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            font-size: 12px;
+            height: 200px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Fixed Bulk Token Optimizer Test Runner</h1>
+    
+    <div class="warning">
+        <strong>⚡ How This Works:</strong> This test simulates user input by programmatically typing into textareas and pressing Enter. The extension's content script will intercept these events and show the optimization overlay. We capture the results by monitoring DOM changes and overlay appearances.
+    </div>
+    
+    <div class="control-panel">
+        <h3>🎯 Test Control Panel</h3>
+        <div class="stats" id="stats">
+            <div class="stat-box">
+                <strong id="total-tests">0</strong>
+                Total Tests
+            </div>
+            <div class="stat-box">
+                <strong id="completed-tests">0</strong>
+                Completed
+            </div>
+            <div class="stat-box">
+                <strong id="successful-tests">0</strong>
+                Successful
+            </div>
+            <div class="stat-box">
+                <strong id="avg-reduction">0%</strong>
+                Avg Reduction
+            </div>
+            <div class="stat-box">
+                <strong id="total-tokens-saved">0</strong>
+                Tokens Saved
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        
+        <button onclick="startBulkTest()" id="start-btn">🚀 Start Bulk Test</button>
+        <button onclick="stopBulkTest()" id="stop-btn" class="button-stop" disabled>⏹️ Stop Test</button>
+        <button onclick="clearResults()" id="clear-btn">🗑️ Clear Results</button>
+        
+        <div class="log" id="console-log"></div>
+    </div>
+
+    <div id="test-results"></div>
+
+    <!-- Test textareas (hidden but functional) -->
+    <div style="position: absolute; left: -9999px;">
+        <textarea id="test-input" placeholder="Test input..." style="width: 300px; height: 100px;"></textarea>
+    </div>
+
+    <script src="debug-content-v5.js"></script>
+    
+    <script>
+        const testCases = [
+            {
+                name: "Basic Verbose Phrases",
+                difficulty: "Medium",
+                input: "I would like you to please help me understand due to the fact that at this point in time I need assistance with this problem",
+                expected: "Help me understand because now I need assistance with this problem"
+            },
+            {
+                name: "Complex Request Pattern", 
+                difficulty: "Medium",
+                input: "Could you please help me to understand how I can basically improve my writing skills and also could you please provide some really good examples",
+                expected: "Help me understand how I can improve my writing skills\n1. Help me understand how I can improve my writing skills\n2. Provide good examples"
+            },
+            {
+                name: "Multi-Task Decomposition",
+                difficulty: "Hard", 
+                input: "I need you to help me write a business plan and also create a marketing strategy and then develop a budget forecast for my startup",
+                expected: "1. Help me write a business plan\n2. Create a marketing strategy\n3. Develop a budget forecast for my startup"
+            },
+            {
+                name: "Filler Word Removal",
+                difficulty: "Medium",
+                input: "I really really need you to basically just help me understand this very complex topic that is quite obviously difficult",
+                expected: "I need you to help me understand this complex topic that is difficult"
+            },
+            {
+                name: "Meta-Commentary Removal",
+                difficulty: "Medium", 
+                input: "It should be noted that I think this is important and as you can see, I believe we need to address this issue",
+                expected: "This is important and we need to address this issue"
+            },
+            {
+                name: "Grammar Preservation",
+                difficulty: "Hard",
+                input: "could you to to help me understand this and please please make sure it's clear",
+                expected: "Help me understand this and make sure it's clear"
+            },
+            {
+                name: "Chain Reaction Optimization",
+                difficulty: "Extreme",
+                input: "I would really like you to please help me to understand due to the fact that at this point in time I basically need assistance with regard to this very complex problem",
+                expected: "Help me understand because now I need assistance regarding this complex problem"
+            },
+            {
+                name: "Nested Politeness Removal",
+                difficulty: "Medium",
+                input: "Could you please kindly help me to understand if you would be so kind as to assist me in figuring out this issue",
+                expected: "Help me understand if you would be so kind as to assist me in figuring out this issue"
+            },
+            {
+                name: "Punctuation Chaos",
+                difficulty: "Extreme",
+                input: "Hello, could you please, really, help me understand,, this problem??? And also,, could you please help me with this other issue!!!",
+                expected: "1. Help me understand this problem?\n2. Help me with this other issue!"
+            },
+            {
+                name: "Word Duplication Matrix",
+                difficulty: "Hard",
+                input: "I really really need you to to help me me understand this this very very complex complex problem that that needs needs attention attention",
+                expected: "I need you to help me understand this complex problem that needs attention"
+            }
+        ];
+
+        let currentTestIndex = 0;
+        let isRunning = false;
+        let testResults = [];
+        let totalTokensSaved = 0;
+        let successfulTests = 0;
+        let currentTestTimeout;
+        let overlayObserver;
+
+        function log(message) {
+            const logElement = document.getElementById('console-log');
+            const timestamp = new Date().toLocaleTimeString();
+            logElement.innerHTML += `[${timestamp}] ${message}\n`;
+            logElement.scrollTop = logElement.scrollHeight;
+            console.log(`[BULK TEST] ${message}`);
+        }
+
+        function updateStats() {
+            document.getElementById('total-tests').textContent = testCases.length;
+            document.getElementById('completed-tests').textContent = testResults.length;
+            document.getElementById('successful-tests').textContent = successfulTests;
+            
+            if (testResults.length > 0) {
+                const avgReduction = testResults.reduce((sum, result) => sum + (result.reductionPercent || 0), 0) / testResults.length;
+                document.getElementById('avg-reduction').textContent = Math.round(avgReduction) + '%';
+                document.getElementById('total-tokens-saved').textContent = totalTokensSaved;
+            }
+        }
+
+        function updateProgress() {
+            const progress = (testResults.length / testCases.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+        }
+
+        function validateResult(actual, expected) {
+            // Normalize both strings for comparison
+            const normalizeText = (text) => {
+                return text.toLowerCase()
+                    .replace(/\s+/g, ' ')
+                    .replace(/[.,!?;:]/g, '')
+                    .trim();
+            };
+            
+            const normalizedActual = normalizeText(actual);
+            const normalizedExpected = normalizeText(expected);
+            
+            // For multi-line expected results, check if structure matches
+            if (expected.includes('\n')) {
+                const expectedLines = expected.split('\n').map(normalizeText);
+                const actualLines = actual.split('\n').map(normalizeText);
+                
+                // Check if both have same number of lines
+                if (expectedLines.length !== actualLines.length) {
+                    return false;
+                }
+                
+                // Check each line
+                for (let i = 0; i < expectedLines.length; i++) {
+                    if (!actualLines[i].includes(expectedLines[i].replace(/^\d+\.\s*/, ''))) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            
+            // Simple text comparison with some flexibility
+            return normalizedActual.includes(normalizedExpected) || 
+                   normalizedExpected.includes(normalizedActual) ||
+                   levenshteinDistance(normalizedActual, normalizedExpected) < Math.max(3, normalizedExpected.length * 0.2);
+        }
+        
+        function levenshteinDistance(str1, str2) {
+            const matrix = [];
+            
+            for (let i = 0; i <= str2.length; i++) {
+                matrix[i] = [i];
+            }
+            
+            for (let j = 0; j <= str1.length; j++) {
+                matrix[0][j] = j;
+            }
+            
+            for (let i = 1; i <= str2.length; i++) {
+                for (let j = 1; j <= str1.length; j++) {
+                    if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
+            
+            return matrix[str2.length][str1.length];
+        }
+
+        function displayTestResult(testCase, result) {
+            const resultsContainer = document.getElementById('test-results');
+            
+            const testDiv = document.createElement('div');
+            testDiv.className = `test-result ${result.success ? 'completed' : 'failed'}`;
+            
+            const statusIcon = result.success ? '✅' : '❌';
+            const statusColor = result.success ? '#10b981' : '#ef4444';
+            
+            testDiv.innerHTML = `
+                <h4>${statusIcon} ${testCase.name} <span style="background: ${statusColor}; color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px;">${testCase.difficulty}</span></h4>
+                
+                <div class="optimization-details">
+                    <strong>📝 Original (${result.originalTokens || 'unknown'} tokens):</strong><br>
+                    <code style="background: #fef2f2; padding: 4px 6px; border-radius: 3px; display: block; white-space: pre-wrap; margin-top: 5px;">${testCase.input}</code>
+                </div>
+                
+                <div class="optimization-details">
+                    <strong>🎯 Expected Result:</strong><br>
+                    <code style="background: #f0f9ff; padding: 4px 6px; border-radius: 3px; display: block; white-space: pre-wrap; margin-top: 5px; border: 1px solid #bfdbfe;">${testCase.expected}</code>
+                </div>
+                
+                <div class="optimization-details">
+                    <strong>🔄 Actual Result (${result.originalTokens || 0} → ${result.optimizedTokens || 0} tokens):</strong><br>
+                    <code style="background: ${result.success ? '#f0fdf4' : '#fef2f2'}; padding: 4px 6px; border-radius: 3px; display: block; white-space: pre-wrap; margin-top: 5px; border: 1px solid ${result.success ? '#bbf7d0' : '#fecaca'};">${result.optimizedText || 'No result'}</code>
+                </div>
+                
+                ${result.validationError ? `
+                <div class="optimization-details" style="background: #fef2f2; border-color: #ef4444;">
+                    <strong>❌ Validation Error:</strong><br>
+                    ${result.validationError}
+                </div>
+                ` : ''}
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                    <div>
+                        <strong>📊 Metrics:</strong><br>
+                        • Token Reduction: ${result.reductionPercent || 0}%<br>
+                        • Character Reduction: ${result.optimizedText ? Math.round(((testCase.input.length - result.optimizedText.length) / testCase.input.length) * 100) : 0}%<br>
+                        • Processing Time: ${result.processingTime || 0}ms<br>
+                        • Validation: ${result.success ? 'PASS' : 'FAIL'}
+                    </div>
+                    <div>
+                        <strong>🔬 Applied Techniques:</strong><br>
+                        ${result.appliedTechniques && result.appliedTechniques.length > 0 ? 
+                            result.appliedTechniques.map(t => `• ${t}`).join('<br>') : 
+                            '• No techniques detected'
+                        }
+                    </div>
+                </div>
+            `;
+            
+            resultsContainer.appendChild(testDiv);
+        }
+
+        function waitForOverlay() {
+            return new Promise((resolve, reject) => {
+                let attempts = 0;
+                const maxAttempts = 50; // 5 seconds total
+                
+                function checkForOverlay() {
+                    const overlay = document.getElementById('token-optimizer-debug');
+                    attempts++;
+                    
+                    if (overlay) {
+                        log('📱 Optimization overlay detected');
+                        
+                        try {
+                            // Extract data from the overlay - FIXED TEXT EXTRACTION
+                            const originalTokensEl = overlay.querySelector('div[style*="color: #dc2626"]');
+                            const optimizedTokensEl = overlay.querySelector('div[style*="color: #16a34a"]');
+                            const reductionEl = overlay.querySelector('div[style*="color: #ea580c"]');
+                            
+                            // Fix: Look for the optimized text container with the right background color
+                            const optimizedTextContainer = overlay.querySelector('div[style*="background: #f0fdf4"][style*="font-family: ui-monospace"]');
+                            const techniquesContainer = overlay.querySelector('div[style*="background: #f0fdf4"][style*="v5 Fixed Techniques"], div[style*="background: #f8fafc"]');
+                            
+                            const originalTokens = originalTokensEl ? parseInt(originalTokensEl.textContent) : 0;
+                            const optimizedTokens = optimizedTokensEl ? parseInt(optimizedTokensEl.textContent) : 0;
+                            const reductionPercent = reductionEl ? parseInt(reductionEl.textContent) : 0;
+                            
+                            // Extract the actual optimized text content
+                            let optimizedText = '';
+                            if (optimizedTextContainer) {
+                                // Get the text content, removing HTML entities
+                                optimizedText = optimizedTextContainer.textContent || optimizedTextContainer.innerText || '';
+                                optimizedText = optimizedText.trim();
+                                // Remove any HTML entities that might be present
+                                const tempDiv = document.createElement('div');
+                                tempDiv.innerHTML = optimizedText;
+                                optimizedText = tempDiv.textContent || tempDiv.innerText || optimizedText;
+                            }
+                            
+                            let appliedTechniques = [];
+                            if (techniquesContainer) {
+                                const techniqueText = techniquesContainer.textContent || '';
+                                // Extract techniques by looking for bullet points
+                                appliedTechniques = techniqueText.split('•').filter(t => t.trim() && !t.includes('v5 Fixed Techniques')).map(t => t.trim());
+                            }
+                            
+                            // Debug logging
+                            log(`🔍 Extracted optimized text: "${optimizedText}"`);
+                            log(`🎯 Expected text: "${testCases[currentTestIndex].expected}"`);
+                            
+                            // Validate against expected result
+                            const testCase = testCases[currentTestIndex];
+                            const isValid = validateResult(optimizedText, testCase.expected);
+                            
+                            const result = {
+                                success: isValid,
+                                originalTokens,
+                                optimizedTokens,
+                                tokensSaved: Math.max(0, originalTokens - optimizedTokens),
+                                reductionPercent,
+                                optimizedText,
+                                expectedText: testCase.expected,
+                                appliedTechniques,
+                                processingTime: attempts * 100,
+                                validationError: isValid ? null : `Expected: "${testCase.expected}", Got: "${optimizedText}"`
+                            };
+                            
+                            // Close the overlay
+                            const closeBtn = overlay.querySelector('button');
+                            if (closeBtn && closeBtn.textContent.includes('×')) {
+                                closeBtn.click();
+                            }
+                            
+                            resolve(result);
+                        } catch (error) {
+                            log(`❌ Error parsing overlay: ${error.message}`);
+                            resolve({
+                                success: false,
+                                error: `Parse error: ${error.message}`
+                            });
+                        }
+                        
+                    } else if (attempts >= maxAttempts) {
+                        reject(new Error('Overlay timeout - extension may not be loaded or working'));
+                    } else {
+                        setTimeout(checkForOverlay, 100);
+                    }
+                }
+                
+                checkForOverlay();
+            });
+        }
+
+        async function runSingleTest(testCase, index) {
+            const startTime = Date.now();
+            log(`🧪 Running test ${index + 1}/${testCases.length}: ${testCase.name}`);
+            
+            try {
+                const textarea = document.getElementById('test-input');
+                
+                // Clear and set the text
+                textarea.value = '';
+                textarea.focus();
+                
+                // Simulate typing the text
+                textarea.value = testCase.input;
+                
+                // Dispatch input event to trigger extension
+                textarea.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                // Wait a moment for the text to be processed
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                // Simulate Enter key press to trigger optimization
+                const enterEvent = new KeyboardEvent('keydown', {
+                    key: 'Enter',
+                    bubbles: true,
+                    cancelable: true
+                });
+                
+                textarea.dispatchEvent(enterEvent);
+                
+                log('⌨️ Simulated Enter key press, waiting for overlay...');
+                
+                // Wait for the optimization overlay to appear
+                const result = await waitForOverlay();
+                
+                testResults.push(result);
+                if (result.success) {
+                    successfulTests++;
+                    totalTokensSaved += result.tokensSaved || 0;
+                    log(`✅ Test completed: ${result.tokensSaved} tokens saved (${result.reductionPercent}% reduction)`);
+                } else {
+                    log(`❌ Test failed: ${result.error}`);
+                }
+                
+                displayTestResult(testCase, result);
+                updateStats();
+                updateProgress();
+                
+                return result;
+                
+            } catch (error) {
+                log(`💥 Test error: ${error.message}`);
+                const failedResult = {
+                    success: false,
+                    error: error.message,
+                    originalTokens: 0,
+                    optimizedTokens: 0,
+                    tokensSaved: 0,
+                    reductionPercent: 0
+                };
+                
+                testResults.push(failedResult);
+                displayTestResult(testCase, failedResult);
+                updateStats();
+                updateProgress();
+                
+                return failedResult;
+            }
+        }
+
+        async function startBulkTest() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            currentTestIndex = 0;
+            testResults = [];
+            totalTokensSaved = 0;
+            successfulTests = 0;
+            
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+            document.getElementById('test-results').innerHTML = '';
+            
+            log('🚀 Starting bulk optimization test...');
+            log('📋 Extension must be loaded for this to work!');
+            
+            for (let i = 0; i < testCases.length && isRunning; i++) {
+                currentTestIndex = i;
+                await runSingleTest(testCases[i], i);
+                
+                // Small delay between tests
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            if (isRunning) {
+                log('🎉 Bulk test completed!');
+                log(`📊 Results: ${successfulTests}/${testResults.length} tests successful`);
+                log(`💰 Total tokens saved: ${totalTokensSaved}`);
+                
+                // Log detailed results for analysis
+                log('\n📋 DETAILED TEST RESULTS:');
+                testResults.forEach((result, index) => {
+                    const testCase = testCases[index];
+                    log(`\n🧪 Test ${index + 1}: ${testCase.name} - ${result.success ? 'PASS' : 'FAIL'}`);
+                    log(`   📝 Input: "${testCase.input}"`);
+                    log(`   🎯 Expected: "${testCase.expected}"`);
+                    log(`   🔄 Actual: "${result.optimizedText || 'No result'}"`);
+                    
+                    if (!result.success && result.validationError) {
+                        log(`   ❌ Error: ${result.validationError}`);
+                    }
+                    
+                    if (result.appliedTechniques && result.appliedTechniques.length > 0) {
+                        log(`   🔬 Techniques: ${result.appliedTechniques.join(', ')}`);
+                    }
+                    
+                    log(`   📊 Tokens: ${result.originalTokens} → ${result.optimizedTokens} (${result.reductionPercent}% reduction)`);
+                });
+                
+                // Summary of failed tests
+                const failedTests = testResults.filter(r => !r.success);
+                if (failedTests.length > 0) {
+                    log(`\n❌ FAILED TESTS (${failedTests.length}):`);
+                    failedTests.forEach((result, index) => {
+                        const testIndex = testResults.indexOf(result);
+                        const testCase = testCases[testIndex];
+                        log(`   • ${testCase.name}: ${result.validationError || 'Unknown error'}`);
+                    });
+                }
+                
+                if (successfulTests > 0) {
+                    const avgReduction = testResults
+                        .filter(r => r.success)
+                        .reduce((sum, result) => sum + result.reductionPercent, 0) / successfulTests;
+                    log(`📈 Average reduction: ${Math.round(avgReduction)}%`);
+                }
+            } else {
+                log('⏹️ Bulk test stopped by user');
+            }
+            
+            stopBulkTest();
+        }
+
+        function stopBulkTest() {
+            isRunning = false;
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+            
+            if (currentTestTimeout) {
+                clearTimeout(currentTestTimeout);
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('test-results').innerHTML = '';
+            document.getElementById('console-log').innerHTML = '';
+            testResults = [];
+            totalTokensSaved = 0;
+            successfulTests = 0;
+            currentTestIndex = 0;
+            updateStats();
+            updateProgress();
+            log('🗑️ Results cleared');
+        }
+
+        // Initialize
+        updateStats();
+        log('💡 Ready to test! Make sure the extension is loaded.');
+        log('📝 Click "Start Bulk Test" to automatically run all optimization tests');
+        
+        // Check if we can detect the extension
+        setTimeout(() => {
+            if (typeof console !== 'undefined') {
+                log('🔍 Checking for extension...');
+                const textarea = document.getElementById('test-input');
+                textarea.focus();
+                if (textarea) {
+                    log('✅ Test textarea ready');
+                } else {
+                    log('❌ Test textarea not found');
+                }
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

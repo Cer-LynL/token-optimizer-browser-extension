@@ -1,0 +1,41 @@
+{
+  "professional-request": {
+    "name": "Professional Request",
+    "category": "email",
+    "description": "Request something professionally from a colleague or client",
+    "template": "Subject: Request for {request_type}\n\nDear {recipient_name},\n\nI hope this email finds you well. I am writing to request {specific_request}.\n\n{context_or_reason}\n\nI would greatly appreciate if you could {specific_action} by {deadline}.\n\n{additional_details}\n\nThank you for your time and consideration. Please let me know if you need any additional information.\n\nBest regards,\n{sender_name}",
+    "variables": ["request_type", "recipient_name", "specific_request", "context_or_reason", "specific_action", "deadline", "additional_details", "sender_name"]
+  },
+  
+  "meeting-invite": {
+    "name": "Meeting Invitation",
+    "category": "email",
+    "description": "Invite someone to a meeting",
+    "template": "Subject: Meeting Invitation - {meeting_topic}\n\nDear {recipient_name},\n\nI would like to schedule a meeting to discuss {meeting_topic}.\n\nProposed Details:\n- Date: {proposed_date}\n- Time: {proposed_time}\n- Duration: {duration}\n- Location/Platform: {location}\n\nAgenda:\n{agenda_items}\n\nPlease let me know if this time works for you, or suggest an alternative that better fits your schedule.\n\n{preparation_notes}\n\nLooking forward to our discussion.\n\nBest regards,\n{sender_name}",
+    "variables": ["meeting_topic", "recipient_name", "proposed_date", "proposed_time", "duration", "location", "agenda_items", "preparation_notes", "sender_name"]
+  },
+  
+  "follow-up": {
+    "name": "Follow-up Email",
+    "category": "email",
+    "description": "Follow up on a previous conversation or request",
+    "template": "Subject: Follow-up on {original_subject}\n\nHi {recipient_name},\n\nI wanted to follow up on our {previous_interaction_type} regarding {topic}.\n\n{reference_to_previous}\n\n{current_status_or_update}\n\n{next_steps_or_request}\n\nPlease let me know if you have any questions or if there's anything else I can provide to move this forward.\n\nThank you for your time.\n\nBest regards,\n{sender_name}",
+    "variables": ["original_subject", "recipient_name", "previous_interaction_type", "topic", "reference_to_previous", "current_status_or_update", "next_steps_or_request", "sender_name"]
+  },
+  
+  "introduction": {
+    "name": "Introduction Email",
+    "category": "email",
+    "description": "Introduce yourself to a new contact",
+    "template": "Subject: Introduction - {your_name} from {your_organization}\n\nDear {recipient_name},\n\nI hope this email finds you well. My name is {your_name}, and I am {your_title} at {your_organization}.\n\n{connection_or_referral}\n\nI am reaching out because {reason_for_contact}.\n\n{brief_background}\n\n{value_proposition_or_mutual_benefit}\n\nI would welcome the opportunity to {proposed_next_step}. Would you be available for a {meeting_type} in the coming weeks?\n\nThank you for your time, and I look forward to hearing from you.\n\nBest regards,\n{your_name}\n{your_title}\n{your_organization}\n{contact_information}",
+    "variables": ["your_name", "your_organization", "recipient_name", "your_title", "connection_or_referral", "reason_for_contact", "brief_background", "value_proposition_or_mutual_benefit", "proposed_next_step", "meeting_type", "contact_information"]
+  },
+  
+  "project-update": {
+    "name": "Project Status Update",
+    "category": "email",
+    "description": "Update stakeholders on project progress",
+    "template": "Subject: {project_name} - Status Update {date}\n\nHi Team,\n\nI wanted to provide you with an update on the progress of {project_name}.\n\n📊 Current Status: {overall_status}\n\n✅ Completed This Week:\n{completed_items}\n\n🔄 In Progress:\n{in_progress_items}\n\n📅 Upcoming Milestones:\n{upcoming_milestones}\n\n⚠️ Risks/Issues:\n{risks_or_issues}\n\n💡 Key Metrics:\n{key_metrics}\n\n🎯 Next Steps:\n{next_steps}\n\nPlease let me know if you have any questions or concerns.\n\nBest regards,\n{sender_name}",
+    "variables": ["project_name", "date", "overall_status", "completed_items", "in_progress_items", "upcoming_milestones", "risks_or_issues", "key_metrics", "next_steps", "sender_name"]
+  }
+}

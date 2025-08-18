@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Token Optimizer v4 - Enhanced Quality</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-box {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .instruction {
+            background: #eff6ff;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .test-case {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #16a34a;
+        }
+        button {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .expected {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+        .improvement {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 Token Optimizer v4 - Enhanced Quality Test</h1>
+    
+    <div class="instruction">
+        <h3>🎯 v4 Quality Improvements:</h3>
+        <ul>
+            <li><strong>Better Duplicate Detection</strong> - Smarter word deduplication</li>
+            <li><strong>Improved Phrase Processing</strong> - Order-aware, context-sensitive</li>
+            <li><strong>Enhanced Chunking</strong> - Proper line breaks, not inline numbers</li>
+            <li><strong>Comprehensive Patterns</strong> - More complete verbose phrase library</li>
+            <li><strong>Grammar Preservation</strong> - Better sentence structure maintenance</li>
+        </ul>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 v4 Test 1: The "please please" Problem</h4>
+        <textarea>I would really like you to please please help me understand this and please please make it clear</textarea>
+        <div class="expected">
+            <strong>v4 Should Fix:</strong> Remove duplicate "please please" → "please", handle multiple instances
+        </div>
+        <div class="improvement">
+            <strong>v4 Enhancement:</strong> Advanced duplicate word detection with boundary checking
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 v4 Test 2: The "to to" Grammar Issue</h4>
+        <textarea>could you to to help me understand this and you to to make sure it works</textarea>
+        <div class="expected">
+            <strong>v4 Should Fix:</strong> Fix "to to" → "to" while preserving grammar context
+        </div>
+        <div class="improvement">
+            <strong>v4 Enhancement:</strong> Context-aware duplicate removal with grammar validation
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 v4 Test 3: "at this point in time" → "now"</h4>
+        <textarea>At this point in time I need help and at this point in time we should discuss this</textarea>
+        <div class="expected">
+            <strong>v4 Should Fix:</strong> Replace ALL instances "at this point in time" → "now"
+        </div>
+        <div class="improvement">
+            <strong>v4 Enhancement:</strong> Comprehensive phrase library with case-insensitive matching
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 v4 Test 4: Chunking Format (Line Breaks)</h4>
+        <textarea>I need you to analyze this data and also create a report and then make visualizations and finally present results</textarea>
+        <div class="expected">
+            <strong>v4 Should Fix:</strong> Proper numbered list with \\n line breaks, not inline format
+        </div>
+        <div class="improvement">
+            <strong>v4 Enhancement:</strong> Semantic chunking with proper formatting and task boundary detection
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 v4 Test 5: Incomplete "could you please" Removal</h4>
+        <textarea>Could you please help me with this and could you please also explain how this works</textarea>
+        <div class="expected">
+            <strong>v4 Should Fix:</strong> Complete removal of ALL "could you please" instances
+        </div>
+        <div class="improvement">
+            <strong>v4 Enhancement:</strong> Comprehensive request pattern matching with global replacement
+        </div>
+    </div>
+
+    <div class="test-case">
+        <h4>🧪 v4 Test 6: Complex Chain (All Issues Combined)</h4>
+        <textarea>Could you please please help me to to understand at this point in time how I can basically improve this and also could you please help me create something</textarea>
+        <div class="expected">
+            <strong>v4 Should Fix:</strong> ALL issues simultaneously - duplicates, phrases, chunking, incomplete removals
+        </div>
+        <div class="improvement">
+            <strong>v4 Enhancement:</strong> Multi-pass optimization with conflict resolution
+        </div>
+    </div>
+
+    <!-- Embedded v4 optimization engine -->
+    <script>
+        console.log('🚀 Token Optimizer v4 Enhanced Quality Engine Loading...');
+        
+        // Enhanced optimization function
+        function optimizeTextV4(text) {
+            console.log('🔬 Starting v4 enhanced optimization...');
+            
+            let optimized = text.trim();
+            const appliedTechniques = new Set();
+            const changes = [];
+            
+            // PASS 1: Advanced Duplicate Word Removal (most critical fix)
+            const duplicateResult = advancedDuplicateRemoval(optimized);
+            if (duplicateResult.changed) {
+                optimized = duplicateResult.text;
+                appliedTechniques.add('Advanced Duplicate Word Removal');
+                changes.push(...duplicateResult.changes);
+            }
+            
+            // PASS 2: Comprehensive Phrase Replacement (ordered by length)
+            const phraseResult = comprehensivePhraseReplacement(optimized);
+            if (phraseResult.changed) {
+                optimized = phraseResult.text;
+                appliedTechniques.add('Comprehensive Phrase Optimization');
+                changes.push(...phraseResult.changes);
+            }
+            
+            // PASS 3: Enhanced Request Pattern Removal
+            const requestResult = enhancedRequestPatternRemoval(optimized);
+            if (requestResult.changed) {
+                optimized = requestResult.text;
+                appliedTechniques.add('Enhanced Request Pattern Removal');
+                changes.push(...requestResult.changes);
+            }
+            
+            // PASS 4: Semantic Task Chunking with Proper Formatting
+            const chunkingResult = semanticTaskChunking(optimized);
+            if (chunkingResult.changed) {
+                optimized = chunkingResult.text;
+                appliedTechniques.add('Semantic Task Chunking');
+                changes.push(...chunkingResult.changes);
+            }
+            
+            // PASS 5: Final Grammar and Formatting Cleanup
+            optimized = finalGrammarCleanup(optimized);
+            
+            console.log('✅ v4 optimization complete:', Array.from(appliedTechniques));
+            
+            return {
+                text: optimized,
+                appliedTechniques: appliedTechniques,
+                changes: changes
+            };
+        }
+        
+        // TECHNIQUE 1: Advanced Duplicate Word Removal
+        function advancedDuplicateRemoval(text) {
+            let result = text;
+            const changes = [];
+            let hasChanges = false;
+            
+            // Pattern 1: Immediate duplicate words (word word)
+            const immediatePattern = /\\b(\\w+)\\s+\\1\\b/gi;
+            const immediateMatches = [...result.matchAll(immediatePattern)];
+            if (immediateMatches.length > 0) {
+                immediateMatches.forEach(match => {
+                    changes.push({ 
+                        type: 'remove', 
+                        text: match[0], 
+                        reason: `Duplicate word removal: "${match[1]} ${match[1]}" → "${match[1]}"` 
+                    });
+                });
+                result = result.replace(immediatePattern, '$1');
+                hasChanges = true;
+            }
+            
+            // Pattern 2: Multiple word repetitions (word word word)
+            const triplePattern = /\\b(\\w+)\\s+\\1\\s+\\1\\b/gi;
+            const tripleMatches = [...result.matchAll(triplePattern)];
+            if (tripleMatches.length > 0) {
+                tripleMatches.forEach(match => {
+                    changes.push({ 
+                        type: 'remove', 
+                        text: match[0], 
+                        reason: `Triple word removal: "${match[0]}" → "${match[1]}"` 
+                    });
+                });
+                result = result.replace(triplePattern, '$1');
+                hasChanges = true;
+            }
+            
+            return { text: result, changed: hasChanges, changes };
+        }
+        
+        // TECHNIQUE 2: Comprehensive Phrase Replacement
+        function comprehensivePhraseReplacement(text) {
+            let result = text;
+            const changes = [];
+            let hasChanges = false;
+            
+            // Ordered by length (longest first to prevent partial matches)
+            const phrases = [
+                { pattern: /\\bat this point in time\\b/gi, replacement: 'now', desc: 'Temporal phrase compression' },
+                { pattern: /\\bdue to the fact that\\b/gi, replacement: 'because', desc: 'Causal phrase compression' },
+                { pattern: /\\bfor the purpose of\\b/gi, replacement: 'for', desc: 'Purpose phrase compression' },
+                { pattern: /\\bwith regard to\\b/gi, replacement: 'regarding', desc: 'Reference phrase compression' },
+                { pattern: /\\bwith respect to\\b/gi, replacement: 'regarding', desc: 'Reference phrase compression' },
+                { pattern: /\\bin order to\\b/gi, replacement: 'to', desc: 'Purpose phrase compression' },
+                { pattern: /\\bin relation to\\b/gi, replacement: 'about', desc: 'Relation phrase compression' },
+                { pattern: /\\bas a matter of fact\\b/gi, replacement: '', desc: 'Filler phrase removal' },
+                { pattern: /\\bit should be noted that\\b/gi, replacement: '', desc: 'Meta-commentary removal' },
+                { pattern: /\\bit is important to note that\\b/gi, replacement: '', desc: 'Meta-commentary removal' }
+            ];
+            
+            phrases.forEach(({ pattern, replacement, desc }) => {
+                const matches = [...result.matchAll(pattern)];
+                if (matches.length > 0) {
+                    matches.forEach(match => {
+                        changes.push({ 
+                            type: 'replace', 
+                            original: match[0], 
+                            replacement: replacement, 
+                            reason: desc 
+                        });
+                    });
+                    result = result.replace(pattern, replacement);
+                    hasChanges = true;
+                }
+            });
+            
+            return { text: result, changed: hasChanges, changes };
+        }
+        
+        // TECHNIQUE 3: Enhanced Request Pattern Removal  
+        function enhancedRequestPatternRemoval(text) {
+            let result = text;
+            const changes = [];
+            let hasChanges = false;
+            
+            // Request patterns (ordered by specificity)
+            const requestPatterns = [
+                { pattern: /\\bi would really like you to please\\b/gi, replacement: '', desc: 'Complex request pattern removal' },
+                { pattern: /\\bi would like you to please\\b/gi, replacement: '', desc: 'Polite request pattern removal' },
+                { pattern: /\\bcould you please\\b/gi, replacement: '', desc: 'Modal request pattern removal' },
+                { pattern: /\\bwould you please\\b/gi, replacement: '', desc: 'Modal request pattern removal' },
+                { pattern: /\\bcan you please\\b/gi, replacement: '', desc: 'Modal request pattern removal' },
+                { pattern: /\\bi would like you to\\b/gi, replacement: '', desc: 'Request pattern removal' },
+                { pattern: /\\bi need you to\\b/gi, replacement: '', desc: 'Request pattern removal' },
+                { pattern: /\\bcould you\\b/gi, replacement: '', desc: 'Simple request pattern removal' },
+                { pattern: /\\bcan you\\b/gi, replacement: '', desc: 'Simple request pattern removal' },
+                { pattern: /\\bwould you\\b/gi, replacement: '', desc: 'Simple request pattern removal' }
+            ];
+            
+            requestPatterns.forEach(({ pattern, replacement, desc }) => {
+                const matches = [...result.matchAll(pattern)];
+                if (matches.length > 0) {
+                    matches.forEach(match => {
+                        changes.push({ 
+                            type: 'remove', 
+                            text: match[0], 
+                            reason: desc 
+                        });
+                    });
+                    result = result.replace(pattern, replacement);
+                    hasChanges = true;
+                }
+            });
+            
+            return { text: result, changed: hasChanges, changes };
+        }
+        
+        // TECHNIQUE 4: Semantic Task Chunking
+        function semanticTaskChunking(text) {
+            if (text.length < 80) {
+                return { text, changed: false, changes: [] };
+            }
+            
+            // Look for task coordination patterns
+            const taskConnectors = [
+                /\\b(and also|also)\\b/gi,
+                /\\b(and then|then)\\b/gi,
+                /\\b(additionally|furthermore|moreover)\\b/gi,
+                /\\b(finally|lastly)\\b/gi
+            ];
+            
+            let hasMultipleTasks = false;
+            taskConnectors.forEach(pattern => {
+                if (pattern.test(text)) {
+                    hasMultipleTasks = true;
+                }
+            });
+            
+            if (!hasMultipleTasks) {
+                return { text, changed: false, changes: [] };
+            }
+            
+            // Split on coordinators and create numbered list
+            const splitPattern = /\\s+(and also|also|and then|then|additionally|furthermore|moreover|finally|lastly)\\s+/gi;
+            const parts = text.split(splitPattern);
+            
+            const cleanTasks = [];
+            for (let i = 0; i < parts.length; i += 2) { // Skip connectors
+                const part = parts[i];
+                if (part && part.trim().length > 20) {
+                    let cleanTask = part.trim()
+                        .replace(/^[,.\\s]+/, '')
+                        .replace(/\\s+/g, ' ');
+                    cleanTasks.push(cleanTask);
+                }
+            }
+            
+            if (cleanTasks.length >= 2 && cleanTasks.length <= 5) {
+                // Use actual line breaks (\\n) for proper formatting
+                const numberedTasks = cleanTasks
+                    .map((task, index) => `${index + 1}. ${task}`)
+                    .join('\\n');
+                
+                return { 
+                    text: numberedTasks, 
+                    changed: true, 
+                    changes: [{ type: 'restructure', reason: 'Multi-task semantic chunking with line breaks' }]
+                };
+            }
+            
+            return { text, changed: false, changes: [] };
+        }
+        
+        // TECHNIQUE 5: Final Grammar Cleanup
+        function finalGrammarCleanup(text) {
+            let result = text
+                .replace(/\\s+/g, ' ')                    // Normalize whitespace
+                .replace(/\\s*([,.!?;:])/g, '$1')        // Fix punctuation spacing
+                .replace(/([,.!?;:])\\s*([,.!?;:])/g, '$1') // Remove duplicate punctuation
+                .replace(/^\\s*[,.\\s]+/, '')            // Remove leading punctuation
+                .trim();
+            
+            // Ensure proper capitalization
+            if (result && /^[a-z]/.test(result)) {
+                result = result.charAt(0).toUpperCase() + result.slice(1);
+            }
+            
+            return result;
+        }
+        
+        // Token estimation
+        function estimateTokensV4(text) {
+            if (!text || text.trim() === '') return 0;
+            
+            const words = text.trim().split(/\\s+/);
+            let tokenCount = 0;
+            
+            words.forEach(word => {
+                if (word.length <= 3) {
+                    tokenCount += 1;
+                } else if (word.length <= 6) {
+                    tokenCount += 1.2;
+                } else if (word.length <= 10) {
+                    tokenCount += Math.ceil(word.length / 4.5);
+                } else {
+                    tokenCount += Math.ceil(word.length / 3.8);
+                }
+            });
+            
+            const punctuation = (text.match(/[.,!?;:()\\-'\"]/g) || []).length;
+            tokenCount += punctuation * 0.25;
+            
+            const newlines = (text.match(/\\n/g) || []).length;
+            tokenCount += newlines * 0.1;
+            
+            return Math.max(1, Math.round(tokenCount));
+        }
+        
+        // Test function
+        function testV4Optimization() {
+            const testCases = [
+                "I would like you to please please help me understand this",
+                "could you to to help me understand this problem",
+                "At this point in time I need assistance with this",
+                "I need you to analyze this and also create a report and then present results",
+                "Could you please help me with this and could you please explain how it works"
+            ];
+            
+            testCases.forEach((testCase, index) => {
+                console.log(`\\n🧪 Test ${index + 1}: "${testCase}"`);
+                const result = optimizeTextV4(testCase);
+                console.log(`✅ Result: "${result.text}"`);
+                console.log(`🔬 Techniques: ${Array.from(result.appliedTechniques).join(', ')}`);
+                
+                const originalTokens = estimateTokensV4(testCase);
+                const optimizedTokens = estimateTokensV4(result.text);
+                console.log(`📊 Tokens: ${originalTokens} → ${optimizedTokens} (${Math.round(((originalTokens - optimizedTokens) / originalTokens) * 100)}% reduction)`);
+            });
+        }
+        
+        // Auto-test on load
+        setTimeout(() => {
+            console.log('🔬 Running v4 optimization tests...');
+            testV4Optimization();
+        }, 1000);
+        
+    </script>
+</body>
+</html>
