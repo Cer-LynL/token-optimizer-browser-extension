@@ -5,6 +5,8 @@ class TokenOptimizerOverlay {
     this.currentData = null;
   }
 
+  error syntax
+
   async show(data) {
     this.currentData = data;
     
