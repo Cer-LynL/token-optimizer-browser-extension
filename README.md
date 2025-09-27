@@ -1,6 +1,6 @@
 # Token Optimizer Browser Extension
 
-TESTING HERE
+TESTING HERE development branch
 
 IM WRITING TEST LINE FOR TESTING DRIFTOR*S WEBHOOK INTEGRATION VOL 5
 
@@ -196,6 +196,7 @@ This project is under active development. Current focus areas:
 MIT License – see [LICENSE](LICENSE) for details.
 
 ---
+blablabla
 
 ## ⚠️ Disclaimer
 This extension is currently in development and should be considered experimental. Use with caution and always review optimized prompts before sending. The optimization algorithms are based on research papers but may not work perfectly for all use cases.
